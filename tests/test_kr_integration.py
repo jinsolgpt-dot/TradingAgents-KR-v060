@@ -1,6 +1,7 @@
 """Korean adapters through the unchanged upstream tool/graph contracts."""
 
 from copy import deepcopy
+from datetime import UTC
 from typing import TypedDict
 from unittest.mock import MagicMock
 
@@ -17,10 +18,10 @@ from tradingagents.dataflows.config import set_config
 from tradingagents.dataflows.errors import VendorNotConfiguredError
 from tradingagents.dataflows.symbols import normalize_symbol
 from tradingagents.default_config import DEFAULT_CONFIG
-from tradingagents.graph.settlement import resolve_benchmark
 from tradingagents.graph.trading_graph import TradingAgentsGraph
 from tradingagents.llm_clients.factory import build_llm_kwargs
 from tradingagents.markets.korea import get_korea_config, normalize_portfolio
+from tradingagents.memory.settlement import resolve_benchmark
 from tradingagents.portfolio import PortfolioContext, Position
 
 
@@ -56,6 +57,7 @@ def test_korean_sentiment_uses_news_proxy_without_unvalidated_us_social(monkeypa
 class ToolState(TypedDict):
     messages: list
     trade_date: str
+    company_of_interest: str
 
 
 def test_profile_is_opt_in_and_preserves_explicit_overrides():
@@ -79,7 +81,7 @@ def test_korean_canonical_symbols_and_benchmarks_are_consistent():
     graph.config = config
     assert resolve_benchmark("삼성전자", config) == "^KS11"
     assert resolve_benchmark("240810.KQ", config) == "^KQ11"
-    assert "KRW" in graph.resolve_instrument_context("005930.KS", curr_date="2026-01-05")
+    assert "KRW" in graph.resolve_instrument_context("005930.KS", trade_date="2026-01-05")
 
 
 def test_upstream_symbol_defaults_are_unchanged():
@@ -115,7 +117,7 @@ def test_toolnode_injects_date_before_korean_vendor(monkeypatch, tool, args, met
     builder.add_node("tools", ToolNode([tool]))
     builder.add_edge(START, "tools")
     builder.add_edge("tools", END)
-    result = builder.compile().invoke({"trade_date": "2026-01-05", "messages": [AIMessage(
+    result = builder.compile().invoke({"company_of_interest": "005930.KS", "trade_date": "2026-01-05", "messages": [AIMessage(
         content="", tool_calls=[{"name": method, "args": args, "id": "kr-1", "type": "tool_call"}])
     ]})
     assert result["messages"][0].content == "verified Korean evidence"
@@ -260,14 +262,14 @@ def test_complete_korean_graph_with_codex_transport_mock(monkeypatch, tmp_path):
 
 
 def test_korean_today_uses_seoul_even_on_utc_host(monkeypatch):
-    from datetime import datetime, timezone
+    from datetime import datetime
 
     from tradingagents.dataflows import date_window as utils
 
     class Clock:
         @staticmethod
         def now(tz):
-            return datetime(2026, 9, 24, 16, tzinfo=timezone.utc).astimezone(tz)
+            return datetime(2026, 9, 24, 16, tzinfo=UTC).astimezone(tz)
 
     set_config(get_korea_config())
     monkeypatch.setattr(utils, "datetime", Clock)

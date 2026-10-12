@@ -2,7 +2,7 @@
 
 ## 기준과 구조
 
-- upstream `refs/tags/v0.5.1^{commit}`: `35543d0248bf89fcb92b17a15858ad0c0e940687`.
+- upstream `refs/tags/v0.6.0^{commit}`: `1394a3f72aa4393e1a98f51b382434c4b4c2d972`.
 - KR 참고 commit: `ce0aa456419800c29325516f984fc55a9a8f14dd`.
 - GitHub 정식 fork: <https://github.com/jinsolgpt-dot/TradingAgents-KR-v050>.
 - `upstream`은 TauricResearch/TradingAgents, `origin`은 위 개인 fork입니다.
@@ -105,7 +105,32 @@ KIS/DART/ECOS/Naver, 종목 정규화, KST 날짜 처리, Codex 옵션 전달을
 이번 업데이트에서 전체 종목 분석과 모든 외부 API를 다시 실행하지는 않았습니다.
 `.env`, `TradingAgents.env`, 생성 보고서는 Git에서 제외하며 푸시 전 실제 키의 staged diff 포함 여부를 검사합니다.
 
-## 출처
+## v0.6.0 업데이트 — UP8K4M2R9A
+
+2026-10-13 공식 최신 정식 릴리스 v0.6.0 태그
+`1394a3f72aa4393e1a98f51b382434c4b4c2d972`를 병합했습니다.
+기존 한국 브랜치 이름은 유지하며 패키지 버전은 0.6.0입니다.
+
+- 원본 HTML 보고서, 모델 단계별 공급자, 병렬 판단 정산 및 날짜·뉴스 오류 수정을 반영했습니다.
+- KIS/DART/ECOS/Naver, 한국 종목 해석, 한국 날짜, Codex CLI 옵션, 재무 기간 검증과 뉴스 재시도를 유지했습니다.
+- 한국어 역할명은 Markdown과 HTML에 병기하며 HTML 언어도 `ko`로 표시합니다.
+- 정산 모듈 이동, 종목의 그래프 상태 주입, 새 보고서 저장 인터페이스에 한국판 접점을 맞췄습니다.
+- 원본의 VendorUnavailableError와 한국판 오류 클래스를 통합했습니다. 기존 한국 공급자의 호출 제한 클래스는 호환 하위 클래스로 유지합니다.
+- Python 최소 요구사항을 3.11로 올리고 한국판 CI를 3.11/3.12로 변경했습니다.
+  로컬은 Python 3.12.14로 `.venv`를 재구성했으며 기존 환경은 Git 제외 백업
+  `.venv-py310-UP8K4M2R9A/`에 보존했습니다. Codex CLI는 기존 경로에 복사해 유지했습니다.
+- 원본 캐시 격리 테스트는 Windows 임시 폴더가 사용자 홈 내부에 있다는 이유로 실패했습니다.
+  홈 전체가 아니라 conftest에서 할당한 전용 임시 폴더인지 확인하도록 수정했습니다.
+
+검증: 전체 pytest **1344 passed, 4 skipped, 1 deselected, 100 subtests passed**,
+기존 경고 20개. 소스·설치 패키지 버전 0.6.0, pip 의존성 검사, Ruff, 한국 CLI 도움말과 doctor 통과.
+doctor는 키·실행 파일의 존재만 검사합니다. 실제 외부 API 인증, LLM 종목 재분석,
+기존 판단의 실제 정산 및 GitHub CI 실행 결과는 이 로컬 검증에 포함하지 않습니다.
+`.env`와 `TradingAgents.env`, 기존 보고서와 판단 로그는 업데이트 대상에서 제외했습니다.
+
+### 출처
+
+- [v0.6.0 릴리스](https://github.com/TauricResearch/TradingAgents/releases/tag/v0.6.0)
 
 - [upstream 기준](https://github.com/TauricResearch/TradingAgents/tree/35543d0248bf89fcb92b17a15858ad0c0e940687)
 - [KR 원본](https://github.com/malda231125/TradingAgents-KR/tree/ce0aa456419800c29325516f984fc55a9a8f14dd)

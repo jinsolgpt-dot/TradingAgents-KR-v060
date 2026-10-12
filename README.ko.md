@@ -1,10 +1,10 @@
-# TradingAgents KR — upstream v0.5.1 기반
+# TradingAgents KR — upstream v0.6.0 기반
 
-TauricResearch/TradingAgents **v0.5.1 정식 태그**에 한국시장 데이터와 Codex CLI를 추가한 포크입니다.
+TauricResearch/TradingAgents **v0.6.0 정식 태그**에 한국시장 데이터와 Codex CLI를 추가한 포크입니다.
 원본의 Agent/Graph, point-in-time 날짜 주입, 백테스트, 포트폴리오 컨텍스트,
 판단 로그·스코어링·보고서·체크포인트를 유지합니다.
 
-- [원본 v0.5.1](https://github.com/TauricResearch/TradingAgents/tree/v0.5.1)
+- [원본 v0.6.0](https://github.com/TauricResearch/TradingAgents/tree/v0.6.0)
 - [한국 기능 참고 프로젝트](https://github.com/malda231125/TradingAgents-KR/blob/ce0aa456419800c29325516f984fc55a9a8f14dd/README.ko.md)
 - [upstream 유지보수·검증 기록](docs/KOREA_PORT.md)
 - [재무 기간·뉴스 장애·보고서 오류 수정 기록](docs/REPORT_AUDIT_RP8K4M2D7A.md)
@@ -65,6 +65,7 @@ notepad .\reports\samsung-first\complete_report.md
 | 파일·폴더 | 확인할 내용 |
 |---|---|
 | `complete_report.md` | 분석·토론·판단을 합친 종합 보고서 |
+| `complete_report.html` | 목차가 있는 브라우저·인쇄용 보고서 (v0.6.0부터 기본 생성) |
 | `1_analysts/` | 시장, 심리, 뉴스, 재무 분석 |
 | `2_research/` | 상승·하락 논거와 연구 담당자의 결론 |
 | `3_trading/trader.md` | 트레이더의 제안 |
@@ -173,7 +174,7 @@ notepad .\reports\samsung-first\complete_report.md
 
 ## 새 PC에 설치하기
 
-Python 3.10 이상. 이 저장소는 기존 backtest 프로젝트와 독립적입니다.
+Python 3.11 이상. 이 저장소는 기존 backtest 프로젝트와 독립적입니다.
 
 ```powershell
 python -m venv .venv

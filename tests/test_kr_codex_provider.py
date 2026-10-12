@@ -18,6 +18,22 @@ from tradingagents.llm_clients.factory import create_llm_client
 from tradingagents.llm_clients.validators import validate_model
 
 
+def test_codex_tier_keeps_cli_options_without_other_provider_endpoint():
+    from tradingagents.llm_clients.factory import create_tier_client
+
+    config = {
+        "llm_provider": "openai", "backend_url": "https://example.test/v1",
+        "deep_think_provider": "codex", "deep_think_llm": "gpt-6-astra",
+        "codex_command": "project-codex", "codex_timeout": 600,
+        "openai_reasoning_effort": "low",
+    }
+    llm = create_tier_client(config, "deep").get_llm()
+    assert isinstance(llm, CodexChatModel)
+    assert llm.cli_command == "project-codex"
+    assert llm.timeout == 600
+    assert llm.reasoning_effort == "low"
+
+
 @tool
 def stock_price(symbol: str) -> str:
     """Return an offline stock quote."""

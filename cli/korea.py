@@ -11,7 +11,7 @@ from zoneinfo import ZoneInfo
 import typer
 from dotenv import load_dotenv
 
-app = typer.Typer(help="TradingAgents v0.5.0 한국시장 분석 (주문 기능 없음).")
+app = typer.Typer(help="TradingAgents 한국시장 분석 (주문 기능 없음).")
 
 
 def _config(provider: str | None, model: str | None) -> dict:
@@ -84,8 +84,9 @@ def backtest(
 ):
     """upstream 백테스트·판단 로그·스코어링을 사용합니다."""
     config = _config(provider, model)
-    from tradingagents.backtest import iter_grid, run_backtest, summarize
     from tradingagents.decision_log import TradingMemoryLog
+
+    from tradingagents.backtest import iter_grid, run_backtest, summarize
 
     try:
         symbols = [_symbol(t.strip()) for t in tickers.split(",") if t.strip()]

@@ -4,7 +4,7 @@
 
 - upstream `refs/tags/v0.6.0^{commit}`: `1394a3f72aa4393e1a98f51b382434c4b4c2d972`.
 - KR 참고 commit: `ce0aa456419800c29325516f984fc55a9a8f14dd`.
-- GitHub 정식 fork: <https://github.com/jinsolgpt-dot/TradingAgents-KR-v050>.
+- GitHub 정식 fork: <https://github.com/jinsolgpt-dot/TradingAgents-KR-v060>.
 - `upstream`은 TauricResearch/TradingAgents, `origin`은 위 개인 fork입니다.
 - `codex/korean-market-v050`에서 한국 기능을 관리합니다. 기존 upstream `main`과 commit 이력을 보존합니다.
 
@@ -63,6 +63,13 @@ Codex subprocess 인자와 구조화 응답, 실제 LangGraph/ToolNode 왕복, �
 검사합니다. 원본 CI는 그대로 유지합니다. 로컬에서 실행하지 않은 CI 환경의 통과를 보장하지 않습니다.
 
 ## upstream 업데이트
+
+버전 업데이트 시 로컬 폴더와 GitHub 저장소 이름도 `TradingAgents-KR-v<버전 숫자>`로 함께 변경합니다.
+예: v0.6.0 → `TradingAgents-KR-v060`. 원격 주소, editable 설치·CLI 경로,
+Codex 실행 경로, 연결 worktree와 문서 링크를 변경 후 검증합니다.
+
+2026-10-13 `RN6K2M8P4A`: 저장소와 로컬 폴더를 `TradingAgents-KR-v060`으로 변경했습니다.
+기존 `codex/korean-market-v050` 브랜치의 이력은 유지합니다.
 
 원격 반영 전에는 현재 변경을 검토하고 별도로 commit/push합니다. 이후 한국 브랜치에서:
 

@@ -44,7 +44,7 @@ Codex 앱에서 이 프로젝트 폴더를 작업 대상으로 열고 다음처�
 별도의 가상환경 활성화 명령은 필요하지 않습니다.
 
 ```powershell
-cd C:\Users\wlsth\Documents\TradingAgents-KR-v050
+cd C:\Users\wlsth\Documents\TradingAgents-KR-v060
 .\.venv\Scripts\python -m cli.korea doctor
 .\.venv\Scripts\python -m cli.korea analyze 삼성전자 --output .\reports\samsung-first
 ```
